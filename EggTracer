@@ -29,41 +29,23 @@ end
 local eggSettings = {
 
 	["Blackhole Egg"] = {
-
-		-- Main tracer / outline
 		color = Color3.fromRGB(175, 60, 255),
-
-		-- Second color used by tracer
 		secondary = Color3.fromRGB(70, 15, 110),
-
-		-- Label background
 		accent = Color3.fromRGB(25, 10, 35),
-
 		emoji = "✦"
 	},
 
 	["Solaris Egg"] = {
-
 		color = Color3.fromRGB(255, 190, 45),
-
 		secondary = Color3.fromRGB(255, 95, 20),
-
 		accent = Color3.fromRGB(55, 30, 5),
-
 		emoji = "☀"
 	},
 
 	["Cherub Egg"] = {
-
-		-- White
 		color = Color3.fromRGB(255, 255, 255),
-
-		-- Yellow
 		secondary = Color3.fromRGB(255, 220, 70),
-
-		-- Dark warm background
 		accent = Color3.fromRGB(55, 50, 25),
-
 		emoji = "♥"
 	}
 }
@@ -102,7 +84,6 @@ main.Size = UDim2.fromOffset(230, 85)
 main.Position = UDim2.new(0.5, -115, 0.5, -42)
 
 main.BackgroundColor3 = Color3.fromRGB(24, 24, 31)
-
 main.Parent = gui
 
 local mainCorner = Instance.new("UICorner")
@@ -121,18 +102,13 @@ mainStroke.Parent = main
 local title = Instance.new("TextLabel")
 
 title.BackgroundTransparency = 1
-
 title.Position = UDim2.fromOffset(16, 9)
 title.Size = UDim2.new(1, -80, 0, 27)
 
 title.Font = Enum.Font.GothamBold
-
 title.Text = "Egg Tracer"
-
 title.TextColor3 = Color3.fromRGB(245, 245, 250)
-
 title.TextSize = 17
-
 title.TextXAlignment = Enum.TextXAlignment.Left
 
 title.Parent = main
@@ -144,18 +120,13 @@ title.Parent = main
 local status = Instance.new("TextLabel")
 
 status.BackgroundTransparency = 1
-
 status.Position = UDim2.fromOffset(16, 38)
 status.Size = UDim2.new(1, -80, 0, 20)
 
 status.Font = Enum.Font.Gotham
-
 status.Text = "● OFF"
-
 status.TextColor3 = Color3.fromRGB(130, 130, 140)
-
 status.TextSize = 11
-
 status.TextXAlignment = Enum.TextXAlignment.Left
 
 status.Parent = main
@@ -167,23 +138,17 @@ status.Parent = main
 local toggle = Instance.new("TextButton")
 
 toggle.Name = "Toggle"
-
 toggle.Size = UDim2.fromOffset(46, 26)
-
 toggle.Position = UDim2.new(1, -62, 0.5, -13)
 
 toggle.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
-
 toggle.Text = ""
-
 toggle.AutoButtonColor = false
 
 toggle.Parent = main
 
 local toggleCorner = Instance.new("UICorner")
-
 toggleCorner.CornerRadius = UDim.new(1, 0)
-
 toggleCorner.Parent = toggle
 
 --------------------------------------------------
@@ -193,17 +158,13 @@ toggleCorner.Parent = toggle
 local knob = Instance.new("Frame")
 
 knob.Size = UDim2.fromOffset(20, 20)
-
 knob.Position = UDim2.fromOffset(3, 3)
 
 knob.BackgroundColor3 = Color3.fromRGB(235, 235, 240)
-
 knob.Parent = toggle
 
 local knobCorner = Instance.new("UICorner")
-
 knobCorner.CornerRadius = UDim.new(1, 0)
-
 knobCorner.Parent = knob
 
 --------------------------------------------------
@@ -235,46 +196,33 @@ end
 -- CREATE EGG BILLBOARD
 --------------------------------------------------
 
-local function createBillboard(
-	egg,
-	part,
-	settings
-)
+local function createBillboard(egg, part, settings)
 
 	local billboard = Instance.new("BillboardGui")
 
 	billboard.Name = "EggInfo"
-
 	billboard.Adornee = part
 
 	--------------------------------------------------
 	-- CONSTANT SCREEN SIZE
 	--------------------------------------------------
 
-	billboard.Size = UDim2.fromOffset(
-		170,
-		48
-	)
+	billboard.Size = UDim2.fromOffset(170, 48)
 
 	--------------------------------------------------
-	-- POSITION ABOVE EGG
+	-- ABOVE EGG
 	--------------------------------------------------
 
-	billboard.StudsOffset =
-		Vector3.new(
-			0,
-			3.2,
-			0
-		)
+	billboard.StudsOffset = Vector3.new(0, 3.2, 0)
 
 	--------------------------------------------------
-	-- INFINITE DISTANCE
+	-- HUGE DISTANCE
 	--------------------------------------------------
 
-	billboard.MaxDistance = 0
+	billboard.MaxDistance = 9999999999999
 
 	--------------------------------------------------
-	-- ALWAYS ON TOP
+	-- RENDER ABOVE 3D OBJECTS
 	--------------------------------------------------
 
 	billboard.AlwaysOnTop = true
@@ -289,27 +237,15 @@ local function createBillboard(
 
 	local background = Instance.new("Frame")
 
-	background.Size =
-		UDim2.fromScale(
-			1,
-			1
-		)
+	background.Size = UDim2.fromScale(1, 1)
 
-	background.BackgroundColor3 =
-		settings.accent
-
+	background.BackgroundColor3 = settings.accent
 	background.BackgroundTransparency = 0.08
 
 	background.Parent = billboard
 
 	local bgCorner = Instance.new("UICorner")
-
-	bgCorner.CornerRadius =
-		UDim.new(
-			0,
-			10
-		)
-
+	bgCorner.CornerRadius = UDim.new(0, 10)
 	bgCorner.Parent = background
 
 	--------------------------------------------------
@@ -318,12 +254,9 @@ local function createBillboard(
 
 	local bgStroke = Instance.new("UIStroke")
 
-	bgStroke.Thickness = 1.5
-
-	bgStroke.Color =
-		settings.secondary
-
-	bgStroke.Transparency = 0.05
+	bgStroke.Thickness = 2
+	bgStroke.Color = settings.secondary
+	bgStroke.Transparency = 0
 
 	bgStroke.Parent = background
 
@@ -335,22 +268,10 @@ local function createBillboard(
 
 	nameLabel.BackgroundTransparency = 1
 
-	nameLabel.Position =
-		UDim2.fromOffset(
-			8,
-			3
-		)
+	nameLabel.Position = UDim2.fromOffset(8, 3)
+	nameLabel.Size = UDim2.new(1, -16, 0, 23)
 
-	nameLabel.Size =
-		UDim2.new(
-			1,
-			-16,
-			0,
-			23
-		)
-
-	nameLabel.Font =
-		Enum.Font.GothamBold
+	nameLabel.Font = Enum.Font.GothamBold
 
 	nameLabel.Text =
 		settings.emoji
@@ -358,15 +279,11 @@ local function createBillboard(
 		.. egg.Name
 
 	nameLabel.TextColor3 =
-		Color3.fromRGB(
-			255,
-			255,
-			255
-		)
+		Color3.fromRGB(255, 255, 255)
 
 	nameLabel.TextSize = 13
 
-	nameLabel.TextStrokeTransparency = 0.6
+	nameLabel.TextStrokeTransparency = 0.25
 
 	nameLabel.TextXAlignment =
 		Enum.TextXAlignment.Center
@@ -381,30 +298,19 @@ local function createBillboard(
 
 	targetLabel.BackgroundTransparency = 1
 
-	targetLabel.Position =
-		UDim2.fromOffset(
-			8,
-			25
-		)
+	targetLabel.Position = UDim2.fromOffset(8, 25)
+	targetLabel.Size = UDim2.new(1, -16, 0, 17)
 
-	targetLabel.Size =
-		UDim2.new(
-			1,
-			-16,
-			0,
-			17
-		)
+	targetLabel.Font = Enum.Font.GothamMedium
 
-	targetLabel.Font =
-		Enum.Font.GothamMedium
-
-	targetLabel.Text =
-		"● TARGET"
+	targetLabel.Text = "● TARGET"
 
 	targetLabel.TextColor3 =
 		settings.secondary
 
 	targetLabel.TextSize = 9
+
+	targetLabel.TextStrokeTransparency = 0.2
 
 	targetLabel.TextXAlignment =
 		Enum.TextXAlignment.Center
@@ -420,15 +326,13 @@ end
 
 local function createEffect(egg)
 
-	local settings =
-		eggSettings[egg.Name]
+	local settings = eggSettings[egg.Name]
 
 	if not settings then
 		return
 	end
 
-	local part =
-		getEggPart(egg)
+	local part = getEggPart(egg)
 
 	if not part then
 		return
@@ -438,55 +342,38 @@ local function createEffect(egg)
 	-- HIGHLIGHT
 	--------------------------------------------------
 
-	local highlight =
-		Instance.new("Highlight")
+	local highlight = Instance.new("Highlight")
 
-	highlight.Name =
-		"EggHighlight"
+	highlight.Name = "EggHighlight"
 
-	highlight.Adornee =
-		egg
+	highlight.Adornee = egg
 
-	highlight.FillColor =
-		settings.secondary
+	highlight.FillColor = settings.secondary
+	highlight.OutlineColor = settings.color
 
-	highlight.OutlineColor =
-		settings.color
-
-	highlight.FillTransparency =
-		0.38
-
-	highlight.OutlineTransparency =
-		0
+	highlight.FillTransparency = 0.30
+	highlight.OutlineTransparency = 0
 
 	highlight.DepthMode =
 		Enum.HighlightDepthMode.AlwaysOnTop
 
-	highlight.Enabled =
-		enabled
-
-	highlight.Parent =
-		effectFolder
+	highlight.Enabled = enabled
+	highlight.Parent = effectFolder
 
 	--------------------------------------------------
 	-- EGG ATTACHMENT
 	--------------------------------------------------
 
-	local eggAttachment =
-		Instance.new("Attachment")
+	local eggAttachment = Instance.new("Attachment")
 
-	eggAttachment.Name =
-		"EggAttachment"
-
-	eggAttachment.Parent =
-		part
+	eggAttachment.Name = "EggAttachment"
+	eggAttachment.Parent = part
 
 	--------------------------------------------------
 	-- PLAYER ATTACHMENT
 	--------------------------------------------------
 
-	local character =
-		player.Character
+	local character = player.Character
 
 	local root =
 		character
@@ -494,90 +381,106 @@ local function createEffect(egg)
 			"HumanoidRootPart"
 		)
 
-	local playerAttachment =
-		Instance.new("Attachment")
+	local playerAttachment = Instance.new("Attachment")
 
-	playerAttachment.Name =
-		"PlayerAttachment"
+	playerAttachment.Name = "PlayerAttachment"
 
 	if root then
-
-		playerAttachment.Parent =
-			root
-
+		playerAttachment.Parent = root
 	else
-
-		playerAttachment.Parent =
-			workspace.Terrain
-
+		playerAttachment.Parent = workspace.Terrain
 	end
 
 	--------------------------------------------------
-	-- BEAM
+	-- MAIN TRACER
 	--------------------------------------------------
 
-	local beam =
-		Instance.new("Beam")
+	local beam = Instance.new("Beam")
 
-	beam.Name =
-		"EggTracer"
+	beam.Name = "EggTracer"
 
-	beam.Attachment0 =
-		playerAttachment
-
-	beam.Attachment1 =
-		eggAttachment
+	beam.Attachment0 = playerAttachment
+	beam.Attachment1 = eggAttachment
 
 	--------------------------------------------------
-	-- LINE THICKNESS
+	-- VERY VISIBLE
 	--------------------------------------------------
 
-	beam.Width0 =
-		0.14
+	beam.Width0 = 0.28
+	beam.Width1 = 0.28
 
-	beam.Width1 =
-		0.14
+	beam.FaceCamera = true
 
-	beam.FaceCamera =
-		true
+	beam.LightEmission = 1
+	beam.LightInfluence = 0
 
-	beam.LightEmission =
-		1
-
-	beam.LightInfluence =
-		0
+	beam.Segments = 10
 
 	--------------------------------------------------
-	-- EGG COLOR GRADIENT
+	-- COLOR
 	--------------------------------------------------
 
-	beam.Color =
-		ColorSequence.new({
+	beam.Color = ColorSequence.new({
 
-			ColorSequenceKeypoint.new(
-				0,
-				settings.color
-			),
+		ColorSequenceKeypoint.new(
+			0,
+			settings.color
+		),
 
-			ColorSequenceKeypoint.new(
-				0.5,
-				settings.secondary
-			),
+		ColorSequenceKeypoint.new(
+			0.5,
+			settings.secondary
+		),
 
-			ColorSequenceKeypoint.new(
-				1,
-				settings.color
-			)
-		})
+		ColorSequenceKeypoint.new(
+			1,
+			settings.color
+		)
+	})
 
 	beam.Transparency =
 		NumberSequence.new(0)
 
-	beam.Enabled =
-		enabled
+	beam.Enabled = enabled
+	beam.Parent = effectFolder
 
-	beam.Parent =
-		effectFolder
+	--------------------------------------------------
+	-- EXTRA GLOW BEAM
+	--------------------------------------------------
+
+	local glowBeam = Instance.new("Beam")
+
+	glowBeam.Name = "EggTracerGlow"
+
+	glowBeam.Attachment0 = playerAttachment
+	glowBeam.Attachment1 = eggAttachment
+
+	--------------------------------------------------
+	-- BIGGER BUT TRANSPARENT
+	--------------------------------------------------
+
+	glowBeam.Width0 = 0.55
+	glowBeam.Width1 = 0.55
+
+	glowBeam.FaceCamera = true
+
+	glowBeam.LightEmission = 1
+	glowBeam.LightInfluence = 0
+
+	glowBeam.Segments = 10
+
+	glowBeam.Color =
+		ColorSequence.new(
+			settings.secondary
+		)
+
+	glowBeam.Transparency =
+		NumberSequence.new(0.55)
+
+	glowBeam.Enabled = enabled
+
+	-- Put glow behind the main beam in creation order
+	glowBeam.Parent = effectFolder
 
 	--------------------------------------------------
 	-- BILLBOARD
@@ -603,14 +506,12 @@ local function createEffect(egg)
 			highlight = highlight,
 
 			beam = beam,
+			glowBeam = glowBeam,
 
 			billboard = billboard,
 
-			playerAttachment =
-				playerAttachment,
-
-			eggAttachment =
-				eggAttachment
+			playerAttachment = playerAttachment,
+			eggAttachment = eggAttachment
 		}
 	)
 end
@@ -649,6 +550,10 @@ local function scanEggs()
 			data.beam:Destroy()
 		end
 
+		if data.glowBeam then
+			data.glowBeam:Destroy()
+		end
+
 		if data.billboard then
 			data.billboard:Destroy()
 		end
@@ -674,9 +579,8 @@ local function scanEggs()
 
 		if eggSettings[object.Name] then
 
-			createEffect(
-				object
-			)
+			createEffect(object)
+
 		end
 	end
 
@@ -708,24 +612,19 @@ local function setEnabled(state)
 	for _, data in ipairs(eggs) do
 
 		if data.highlight then
-
-			data.highlight.Enabled =
-				state
-
+			data.highlight.Enabled = state
 		end
 
 		if data.beam then
+			data.beam.Enabled = state
+		end
 
-			data.beam.Enabled =
-				state
-
+		if data.glowBeam then
+			data.glowBeam.Enabled = state
 		end
 
 		if data.billboard then
-
-			data.billboard.Enabled =
-				state
-
+			data.billboard.Enabled = state
 		end
 	end
 
@@ -760,7 +659,7 @@ local function setEnabled(state)
 	):Play()
 
 	--------------------------------------------------
-	-- KNOB ANIMATION
+	-- KNOB
 	--------------------------------------------------
 
 	TweenService:Create(
@@ -788,15 +687,13 @@ local function setEnabled(state)
 	):Play()
 
 	--------------------------------------------------
-	-- BORDER ANIMATION
+	-- BORDER
 	--------------------------------------------------
 
 	TweenService:Create(
 		mainStroke,
 
-		TweenInfo.new(
-			0.22
-		),
+		TweenInfo.new(0.22),
 
 		{
 			Color =
@@ -839,7 +736,7 @@ local function setEnabled(state)
 end
 
 --------------------------------------------------
--- ONLY THE SMALL SWITCH TOGGLES
+-- TOGGLE
 --------------------------------------------------
 
 toggle.MouseButton1Click:Connect(
@@ -879,10 +776,6 @@ RunService.RenderStepped:Connect(
 			return
 		end
 
-		--------------------------------------------------
-		-- KEEP EVERY PLAYER ATTACHMENT ON PLAYER
-		--------------------------------------------------
-
 		for _, data in ipairs(eggs) do
 
 			local attachment =
@@ -892,10 +785,10 @@ RunService.RenderStepped:Connect(
 
 				if attachment.Parent ~= root then
 
-					attachment.Parent =
-						root
+					attachment.Parent = root
 
 				end
+
 			end
 		end
 	end
@@ -933,7 +826,6 @@ end
 local dragging = false
 
 local dragStart
-
 local startPosition
 
 main.InputBegan:Connect(
@@ -969,12 +861,10 @@ UserInputService.InputChanged:Connect(
 				UDim2.new(
 
 					startPosition.X.Scale,
-
 					startPosition.X.Offset
 						+ delta.X,
 
 					startPosition.Y.Scale,
-
 					startPosition.Y.Offset
 						+ delta.Y
 				)
@@ -1002,5 +892,6 @@ print("================================")
 print("EGG TRACER LOADED")
 print("Blackhole / Solaris / Cherub")
 print("Brown Egg removed")
+print("MAX DISTANCE: 9999999999999")
 print("Eggs found:", #eggs)
 print("================================")
